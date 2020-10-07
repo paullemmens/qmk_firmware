@@ -27,22 +27,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  ` ~   |   Q  |   W  |  E   |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  BS    |
+ * |  Tab   |   Q  |   W  |  E   |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  BS    |
+ * |        |      |      |      |adjust|      |                              |      |adjust|      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |   `    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |  ESC   | Lgui | Lalt | Lctrl| raise|Lshift|                              |Rshift| raise| Rctrl| AltGr| Rgui |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |  C   |   V  |   B  | Esc  |LShift|  | Del  |LShift|   N  |   M  | ,  < | . >  | /  ? | RShift |
- * |        |      |      |      |      |      | Raise|      |  | Raise|      |      |      |      |      |      |        |
+ * | LShift |   Z  |   X  |  C   |   V  |   B  |      |      |  | Del  | RAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * |        |      |      |      | lower|      |      |      |  | Raise| BS   |      | lower|      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | GUI  | Del  | Space| LCtrl| Esc  |  | Enter| Space| Tab  | Bksp | AltGr|
- *                        |      |      | Lower|      | Raise|  | Lower| Raise|      |      |      |
+ *                        | LGUI | raise| Space| LCtrl|      |  | RCtrl| Enter| Space| AltGr| RGui |
+ *                        |      |      | Lower|      |      |  |      |RSHift|      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_GRV,                  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                                             KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_ESC,                  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                                             KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LSFT,                 KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, LT(_RAISE, KC_ESC),   KC_LSFT, LT(_RAISE, KC_DEL), KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-              KC_LGUI, KC_DEL, LT(_LOWER, KC_SPC), KC_LCTRL, LT(_RAISE, KC_ESC), LT(_LOWER, KC_ENT), LT(_RAISE, KC_SPC), KC_TAB,  KC_BSPC, KC_RALT
+      KC_TAB,  KC_Q,         KC_W,         KC_E,          LT(_ADJUST, KC_R), KC_T,                                                                                            KC_Y,         LT(_ADJUST, KC_U),   KC_I,         KC_O,         KC_P,            KC_BSPC,
+      KC_GRV,  LGUI_T(KC_A), LALT_T(KC_S), LCTRL_T(KC_D), LT(_RAISE, KC_F),  LSFT_T(KC_G),                                                                                    RSFT_T(KC_H), LT(_RAISE, KC_J),    RCTL_T(KC_K), LALT_T(KC_L), RGUI_T(KC_SCLN), KC_QUOT,
+      KC_LSFT, KC_Z,         KC_X,         KC_C,          LT(_LOWER, KC_V),  KC_B,               _______,  _______,                 LT(_RAISE, KC_DEL), MT(KC_RALT, KC_BSPC), KC_N,         LT(_LOWER, KC_M),    KC_COMM,      KC_DOT,       KC_SLSH,         KC_RSFT,
+                                           KC_LGUI,       TT(_RAISE),        LT(_LOWER, KC_SPC), KC_LCTRL, LT(_RAISE, KC_ESC),      KC_RCTRL,           MT(KC_RSFT, KC_ENT),  KC_SPACE,     KC_RALT,             KC_RGUI
     ),
 /*
  * Lower Layer: Symbols

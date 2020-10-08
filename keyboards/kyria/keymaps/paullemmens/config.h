@@ -41,7 +41,9 @@
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 350
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
+//#define PERMISSIVE_HOLD
+#define TAPPING_FORCE_HOLD
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness

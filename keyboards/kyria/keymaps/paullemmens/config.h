@@ -54,5 +54,6 @@
 // Allows media codes to properly register in macros and rotary encoder code
 #define TAP_CODE_DELAY 10
 
+// Personal key definitions:
 #define SGUI_LWR LM(_LOWER, MOD_LSFT|MOD_LGUI)
 #define GUI_LWR LM(_LOWER, MOD_LGUI)

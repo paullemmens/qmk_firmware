@@ -45,6 +45,7 @@
 #define TAPPING_TERM 200
 //#define PERMISSIVE_HOLD
 /* #define TAPPING_FORCE_HOLD */
+#define TAPPING_TOGGLE 2
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness

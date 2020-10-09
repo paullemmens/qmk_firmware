@@ -88,12 +88,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______, _______, KC_0,    KC_P0,   KC_PDOT, _______,
     ),
 /*
- * Adjust Layer: Function keys, RGB
+ * Adjust Layer: Symbols, volume, locks, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        | F1   |  F2  | F3   | F4   | F5   |                              | BrDn | BrUp | Mute | VolDn| VolUp| Insert |
+ * |    !   |  @   |  #   |  $   |  %   |  ^   |                              |   &  |   *  |   (  |   )  |  _   | Insert |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  CAPS  | TOG  | SAI  | HUI  | VAI  | Eff+ |                              |      |      |      |      |      | Scrllck|
+ * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute | VolDn| VolUp| Scrllck|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      | SAD  | HUD  | VAD  | Eff- | MOD  |      |  |      |      |      |      |      |      |      |  NumLk |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -102,10 +102,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                        KC_BRID, KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, KC_INS,
-      KC_CAPS, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI,                                      _______, _______, _______, _______, _______, KC_SLCK,
       _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_MOD,  _______, _______, _______, _______, _______, _______, _______, _______, KC_NLCK,
                                  _______, _______, _______, RGB_RMOD, _______, _______, _______, _______, _______, _______
+      KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                       KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_INS,
+      KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,  KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, KC_SLCK,
     ),
 // /*
 //  * Layer template

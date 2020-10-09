@@ -95,17 +95,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute | VolDn| VolUp| Scrllck|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      | SAD  | HUD  | VAD  | Eff- | MOD  |      |  |      |      |      |      |      |      |      |  NumLk |
+ * |  TOG   | SAD  | HUD  | VAD  | Eff- | RMOD | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|  NumLk |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      | RMOD |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_MOD,  _______, _______, _______, _______, _______, _______, _______, _______, KC_NLCK,
-                                 _______, _______, _______, RGB_RMOD, _______, _______, _______, _______, _______, _______
       KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                       KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_INS,
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,  KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, KC_SLCK,
+      RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, KC_NLCK,
+                                 _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______
+    ),
     ),
 // /*
 //  * Layer template

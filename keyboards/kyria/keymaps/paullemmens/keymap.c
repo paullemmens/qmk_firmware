@@ -70,27 +70,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: numbers, arrows, and some symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |   1    |  2   |  3   |  4   |  5   |  6   |                              |  7   |   8  |   9  |  0   |  -   |   /    |
+ * |   1    |  2   |  3   |  4   |  5   |  6   |                              |  7   |   8  |   9  |  0   |  -   |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  #   |  $   |  (   |  )   |  `   |                              |  4   |   5  |   6  |  +   |  *   |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  1   |  2   |  3   |  Ent |      |        |
+ * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  1   |  2   |  3   |  Ent |  /   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |  0   |  0   |  .   |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      KC_1,        KC_2,    KC_3,    KC_4,    KC_5,    KC_6,                                        KC_7, KC_8,    KC_9, KC_0,    KC_PMNS, KC_PSLS,
+      KC_1,        KC_2,    KC_3,    KC_4,    KC_5,    KC_6,                                        KC_7, KC_8,    KC_9, KC_0,    KC_PMNS, _______,
       TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_4, KC_5,    KC_6, KC_PPLS, KC_PAST, _______,
-      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_1, KC_2,    KC_3, KC_PENT, _______, _______,
+      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_1, KC_2,    KC_3, KC_PENT, KC_PSLS, _______,
                                      _______, _______, _______, _______, _______, _______, KC_0,    KC_0, KC_PDOT, _______
     ),
 /*
  * Adjust Layer: Symbols, volume, locks, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |    !   |  @   |  #   |  $   |  %   |  ^   |                              |   &  |   *  |   (  |   )  |  _   |  \ |   |
+ * |    !   |  @   |  #   |  $   |  %   |  ^   |                              |   &  |   *  |   (  |   )  |  _   |   /    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute | VolDn| VolUp|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                       KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_BSLS,
+      KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                       KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PSLS,
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,  KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, _______,
       RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
                                  _______, _______, _______,  KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______

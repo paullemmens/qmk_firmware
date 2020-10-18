@@ -15,6 +15,18 @@
  */
 #include QMK_KEYBOARD_H
 
+// Tap dance stuff
+enum {
+    TD_5_6,
+    TD_PERC_CIRC
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_5_6] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_6),
+    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC)
+};
+
 enum layers {
     _QWERTY = 0,
     _LOWER,

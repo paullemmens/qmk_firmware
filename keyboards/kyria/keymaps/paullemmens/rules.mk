@@ -6,6 +6,7 @@ RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
 LEADER_ENABLE = no        # Enable the Leader Key feature
 MOUSEKEY_ENABLE = no
 TAP_DANCE_ENABLE = yes
+UNICODE_ENABLE = no
 
 # Bootloader selection
 #   Teensy       halfkay

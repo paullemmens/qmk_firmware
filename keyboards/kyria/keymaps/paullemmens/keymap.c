@@ -27,6 +27,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC)
 };
 
+// Personal key definitions:
+#define SGUI_LWR LM(_LOWER, MOD_LSFT|MOD_LGUI)
+#define GUI_LWR LM(_LOWER, MOD_LGUI)
+
 enum layers {
     _QWERTY = 0,
     _LOWER,

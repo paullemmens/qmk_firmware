@@ -13,7 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #include QMK_KEYBOARD_H
 
 // Tap dance stuff
@@ -202,10 +201,8 @@ static void render_status(void) {
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_kyria_logo();
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
         render_kyria_logo();
     }
 }

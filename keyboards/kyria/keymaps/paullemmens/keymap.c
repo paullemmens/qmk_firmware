@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      | raise|      |                              | lower| raise|      |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | RAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
- * |        |      |      |      | lower|      |      | lower|  | Raise| BS   |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      | lower|  | Raise| BS   |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | LGUI | LAlt | Space| LCtrl| LGui+|  | RCtrl| Enter| Space| AltGr| Menu |
  *                        |      |      | lower|      | lower|  |      |RSHift|      |      |      |
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
       KC_TAB,  KC_Q, KC_W, KC_E,    LT(_ADJUST, KC_R), KC_T,                                                                              KC_Y,              LT(_ADJUST, KC_U),   KC_I,    KC_O,   KC_P,    KC_BSPC,
       KC_ESC,  KC_A, KC_S, KC_D,    LT(_RAISE, KC_F),  KC_G,                                                                              LT(_LOWER, KC_H),  LT(_RAISE, KC_J),    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
-      KC_LSFT, KC_Z, KC_X, KC_C,    LT(_LOWER, KC_V),  KC_B,               TT(_RAISE), SGUI_LWR,     LT(_RAISE, KC_DEL), RALT_T(KC_BSPC), KC_N,              KC_M,                KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+      KC_LSFT, KC_Z, KC_X, KC_C,    KC_V,              KC_B,               TT(_RAISE), SGUI_LWR,     LT(_RAISE, KC_DEL), RALT_T(KC_BSPC), KC_N,              KC_M,                KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
                            KC_LGUI, KC_LALT,           LT(_LOWER, KC_SPC), KC_LCTRL,   GUI_LWR,      KC_RCTRL,           RSFT_T(KC_ENT),  KC_SPC,            KC_RALT,             KC_APP
     ),
 /*

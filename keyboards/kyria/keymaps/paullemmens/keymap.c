@@ -27,7 +27,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_5_6] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_6),
     [TD_6_7] = ACTION_TAP_DANCE_DOUBLE(KC_6, KC_7),
-    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC)
+    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC),
     [TD_CIRC_AMPR] = ACTION_TAP_DANCE_DOUBLE(KC_CIRC, KC_AMPR)
 };
 

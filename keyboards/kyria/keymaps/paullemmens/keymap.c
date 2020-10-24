@@ -15,6 +15,22 @@
  */
 #include QMK_KEYBOARD_H
 
+// Tap dance stuff
+enum {
+    TD_5_6,
+    TD_PERC_CIRC
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_5_6] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_6),
+    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC)
+};
+
+// Personal key definitions:
+#define SGUI_LWR LM(_LOWER, MOD_LSFT|MOD_LGUI)
+#define GUI_LWR LM(_LOWER, MOD_LGUI)
+
 enum layers {
     _QWERTY = 0,
     _LOWER,
@@ -50,9 +66,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Lower Layer: F-keys, Numpad
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |                              |  F7  |  F8  |  F9  |  F10 | - _  |  \ |   |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                              |  F7  |  F8  |  F9  |  F10 | - _  |  \ |   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  €   |      |      |  F11 |  F12 |                              | Left | Down |  Up  | Right|  |   |  = +   |
+ * |        |      |      |  F11 |  F12 |  F6  |                              | Left | Down |  Up  | Right|  |   |  = +   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      | Home | PgDn | PgUp |  End |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -61,10 +77,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_LOWER] = LAYOUT(
-      KC_F1,       KC_F2,      KC_F3,   KC_F4,   KC_F5,   KC_F6,                                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_MINS,    KC_BSLS,
-      TO(_QWERTY), ALGR(KC_5), _______, _______, KC_F11,  KC_F12,                                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_EQL,
-      _______,     _______,    _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,    _______,
-                                        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+      _______,     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_MINS,    KC_BSLS,
+      TO(_QWERTY), _______, _______, KC_F11,  KC_F12,  KC_F6,                                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_EQL,
+      _______,     _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,    _______,
+                                     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
  * Raise Layer: numbers, arrows, and some symbols
@@ -72,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |   1    |  2   |  3   |  4   |  5   |  6   |                              |  7   |   8  |   9  |  0   |  -   |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  #   |  $   |  (   |  )   |  `   |                              |  4   |   5  |   6  |  +   |  *   |        |
+ * |        |  #   |  $   |  (   |  )   |  `   |                              |  4   |   5  |   6  |  +   |  *   |   +    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  1   |  2   |  3   |      |  /   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -81,8 +97,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      KC_1,        KC_2,    KC_3,    KC_4,    KC_5,    KC_6,                                        KC_7, KC_8,    KC_9, KC_0,    KC_PMNS, _______,
-      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_4, KC_5,    KC_6, KC_PPLS, KC_PAST, _______,
+      _______,     KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  KC_7, KC_8,    KC_9, KC_0,    KC_PMNS, _______,
+      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_4, KC_5,    KC_6, KC_PPLS, KC_PAST, KC_PPLS,
       _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_1, KC_2,    KC_3, _______, KC_PSLS, _______,
                                      _______, _______, _______, _______, _______, _______, KC_0,    KC_0, KC_PDOT, _______
     ),
@@ -101,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                       KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, S(KC_EQL),
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, S(KC_EQL),
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,  KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, _______,
       RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
                                  _______, _______, _______,  KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______

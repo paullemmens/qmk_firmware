@@ -18,6 +18,7 @@
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
+  #define OLED_SCROLL_TIMEOUT 5000
 #endif
 
 #ifdef RGBLIGHT_ENABLE
@@ -26,11 +27,8 @@
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
   #define RGBLIGHT_SLEEP
+  /* #define RGBLIGHT_SPLIT */
 #endif
-
-// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
-// #define SPLIT_USB_DETECT
-// #define NO_USB_STARTUP_CHECK
 
 // EC11K encoders have a different resolution than other EC11 encoders.
 // When using the default resolution of 4, if you notice your encoder skipping
@@ -54,6 +52,3 @@
 // Allows media codes to properly register in macros and rotary encoder code
 #define TAP_CODE_DELAY 10
 
-// Personal key definitions:
-#define SGUI_LWR LM(_LOWER, MOD_LSFT|MOD_LGUI)
-#define GUI_LWR LM(_LOWER, MOD_LGUI)

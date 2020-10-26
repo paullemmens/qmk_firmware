@@ -27,7 +27,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_5_6] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_6),
     [TD_6_7] = ACTION_TAP_DANCE_DOUBLE(KC_6, KC_7),
-    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC)
+    [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC),
     [TD_CIRC_AMPR] = ACTION_TAP_DANCE_DOUBLE(KC_CIRC, KC_AMPR)
 };
 
@@ -90,27 +90,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: numbers, arrows, and some symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  1   |  2   |  3   |  4   |  5/6 |                              |  6/7 |   8  |   9  |  0   |  -   |        |
+ * |        |  1   |  2   |  3   |  4   |  5/6 |                              |  6/7 |  7   |  8   |  9   |  0   |   -    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  #   |  $   |  (   |  )   |  `   |                              |  4   |   5  |   6  |  +   |  *   |   +    |
+ * |        |  #   |  $   |  (   |  )   |  `   |                              |  [   |  4   |  5   |  6   |  +   |   *    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  1   |  2   |  3   |      |  /   |        |
+ * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  ]   |  1   |  2   |  3   |  .   |   /    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |  0   |  0   |  .   |      |
+ *                        |      |      |      |      |      |  |      |      |  0   |  0   |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      _______,     KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  TD(TD_6_7), KC_8,    KC_9, KC_0,    KC_PMNS, _______,
-      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_4,       KC_5,    KC_6, KC_PPLS, KC_PAST, KC_PPLS,
-      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_1,       KC_2,    KC_3, _______, KC_PSLS, _______,
-                                     _______, _______, _______, _______, _______, _______, KC_0,    KC_0,       KC_PDOT, _______
+      _______,     KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  TD(TD_6_7), KC_7, KC_8, KC_9, KC_0,    KC_PMNS,
+      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_LBRC,    KC_4, KC_5, KC_6, KC_PPLS, KC_PAST,
+      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_RBRC,    KC_1, KC_2, KC_3, KC_PDOT, KC_PSLS,
+                                     _______, _______, _______, _______, _______, _______, _______, KC_0,       KC_0, _______
     ),
 /*
  * Adjust Layer: Symbols, volume, locks, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  #   |  $   |  %/^ |                              |   &  |   *  |   (  |   )  |  _   |   +    |
+ * |        |  !   |  @   |  #   |  $   |  %/^ |                              |  ^/& |   &  |   *  |   (  |  )   |   _    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute | VolDn| VolUp|        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              TD(TD_CIRC_AMPR),  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, S(KC_EQL),
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              TD(TD_CIRC_AMPR),  KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,           KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, _______,
       RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN,          RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
                                  _______, _______, _______,  KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______

@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |  TOG   | SAD  | HUD  | VAD  | Eff- | RMOD | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|        |
+ * |  TOG   |      |      |      |      |      | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      | NumLk|Scrllk|  |Insert|      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -123,8 +123,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              TD(TD_AMPR_CIRC),  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, _______,
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,           KC_BRIU, KC_MUTE, _______, _______, _______,
-      RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN,          RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
-                                 _______, _______, _______,  KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______
+      RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN,          RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
+                                 _______, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______
     ),
 // /*
 //  * Layer template

@@ -20,7 +20,7 @@ enum {
     TD_5_6,
     TD_6_7,
     TD_PERC_CIRC,
-    TD_CIRC_AMPR
+    TD_AMPR_CIRC
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -28,7 +28,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_5_6] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_6),
     [TD_6_7] = ACTION_TAP_DANCE_DOUBLE(KC_6, KC_7),
     [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC),
-    [TD_CIRC_AMPR] = ACTION_TAP_DANCE_DOUBLE(KC_CIRC, KC_AMPR)
+    [TD_AMPR_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, KC_CIRC)
 };
 
 // Personal key definitions:
@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Adjust Layer: Symbols, volume, locks, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  #   |  $   |  %/^ |                              |  ^/& |   &  |   *  |   (  |  )   |   _    |
+ * |        |  !   |  @   |  #   |  $   |  %/^ |                              |  &/^ |   *  |   (  |   )  |  _   |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              TD(TD_CIRC_AMPR),  KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                              TD(TD_AMPR_CIRC),  KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, _______,
       KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                       KC_BRID,           KC_BRIU, KC_MUTE, _______, _______, _______,
       RGB_TOG, RGB_SAD, RGB_HUD, RGB_VAD, RGB_SPD, RGB_RMOD, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN,          RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
                                  _______, _______, _______,  KC_NLCK, KC_SLCK, KC_INS,  _______, _______, _______, _______

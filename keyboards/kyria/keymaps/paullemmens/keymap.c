@@ -96,15 +96,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |  %   |  ^   |  {   |  }   |  ~   |  [   |   ]  |  |      |      |  ]   |  1   |  2   |  3   |  .   |   /    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |  0   |  0   |      |
+ *                        |      |      |      |      |      |  |      |      |  0   |  .   |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      _______,     KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  TD(TD_6_7), KC_7, KC_8, KC_9, KC_0,    KC_PMNS,
-      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_LBRC,    KC_4, KC_5, KC_6, KC_PPLS, KC_PAST,
-      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_RBRC,    KC_1, KC_2, KC_3, KC_PDOT, KC_PSLS,
-                                     _______, _______, _______, _______, _______, _______, _______, KC_0,       KC_0, _______
+      _______,     KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  TD(TD_6_7), KC_7,    KC_8, KC_9, KC_0,    KC_PMNS,
+      TO(_QWERTY), KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_LBRC,    KC_4,    KC_5, KC_6, KC_PPLS, KC_PAST,
+      _______,     KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_RBRC,    KC_1,    KC_2, KC_3, _______, KC_PSLS,
+                                     _______, _______, _______, _______, _______, _______, _______, KC_0,       KC_PDOT, _______
     ),
 /*
  * Adjust Layer: Symbols, volume, locks, RGB

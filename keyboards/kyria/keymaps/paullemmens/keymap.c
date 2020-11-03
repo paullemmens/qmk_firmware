@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: numbers, arrows, and some symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  1   |  2   |  3   |  4   |  5/6 |                              |  6/7 |  7   |  8   |  9   |  0   |   -    |
+ * |        |  1   |  2   |  3   |  4   |  5   |                              |  6   |  7   |  8   |  9   |  0   |   -    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  #   |  $   |  (   |  )   |  `   |                              |  [   |  4   |  5   |  6   |  +   |   *    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -101,16 +101,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      _______, KC_1,    KC_2,    KC_3,    KC_4,    TD(TD_5_6),                                  TD(TD_6_7), KC_7,    KC_8, KC_9, KC_0,    KC_PMNS,
-      _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_LBRC,    KC_4,    KC_5, KC_6, KC_PPLS, KC_PAST,
-      _______, KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_RBRC,    KC_1,    KC_2, KC_3, _______, KC_PSLS,
-                                 _______, _______, _______, _______, _______, _______, _______, KC_0,       KC_PDOT, _______
+      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8, KC_9, KC_0,    KC_PMNS,
+      _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_LBRC, KC_4,    KC_5, KC_6, KC_PPLS, KC_PAST,
+      _______, KC_PERC, KC_CIRC, KC_LCBR, KC_RCBR, KC_TILD, KC_LBRC, KC_RBRC, _______, _______, KC_RBRC, KC_1,    KC_2, KC_3, _______, KC_PSLS,
+                                 _______, _______, _______, _______, _______, _______, _______, KC_0,    KC_PDOT, _______
     ),
 /*
  * Adjust Layer: Symbols, volume, locks, RGB
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  #   |  $   |  %/^ |                              |  &/^ |   *  |   (  |   )  |  _   |   _    |
+ * |        |  !   |  @   |  #   |  $   |  %   |                              |  ^   |   &  |   *  |   (  |  _   |   _    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -121,9 +121,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  TD(TD_PERC_CIRC),                             TD(TD_AMPR_CIRC), KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_UNDS,
-      KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,          KC_BRIU, KC_MUTE, _______, _______, _______,
-      RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN,         RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                      KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, KC_UNDS,
+      KC_CAPS, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,  KC_BRIU, KC_MUTE, _______, _______, _______,
+      RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
                                  _______, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______,  _______, _______, _______
     ),
 // /*

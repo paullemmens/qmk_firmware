@@ -35,7 +35,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
 #define GUI_LWR     LM(_LOWER, MOD_LGUI)
 // Home row mods
-#define LGUI__Z     LGUI_T(KC_A)
+#define LGUI__Z     LGUI_T(KC_Z)
 
 enum layers {
     _QWERTY = 0,

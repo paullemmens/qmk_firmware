@@ -213,6 +213,7 @@ static void render_status(void) {
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
 static uint8_t zero_bar_count = 0;
 static uint8_t bar_count = 0;
+#define WPM_CUTOFF 20
 
 static void render_wpm_graph(void) {
     uint8_t bar_height = 0;
@@ -224,7 +225,7 @@ static void render_wpm_graph(void) {
         return;
     }
 
-    if(timer_elapsed(wpm_graph_timer) > 500) {
+    if(get_current_wpm() >= WPM_CUTOFF) {
         wpm_graph_timer = timer_read();
 
         if(OLED_DISPLAY_HEIGHT == 64)
@@ -238,7 +239,7 @@ static void render_wpm_graph(void) {
             // keep track of how many zero bars we have drawn.  If
             // there is a whole screen worth, turn the display off and
             // wait until there is something to do
-            if (zero_bar_count > OLED_DISPLAY_WIDTH) {
+            if (zero_bar_count > OLED_DISPLAY_WIDTH / 5) {
                 /* oled_off(); */
                 render_kyria_logo();
                 return;
@@ -297,6 +298,9 @@ static void render_wpm_graph(void) {
             }
             oled_write_raw_byte(bar_segment, (i-1) * OLED_DISPLAY_WIDTH);
         }
+    }
+    else if(get_current_wpm() < WPM_CUTOFF && timer_elapsed(wpm_graph_timer) > 10000) {
+        render_kyria_logo();
     }
 }
 

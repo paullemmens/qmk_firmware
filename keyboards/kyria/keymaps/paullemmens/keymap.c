@@ -208,9 +208,18 @@ static void render_status(void) {
 
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCR ") : PSTR("    "), false);
+
+    #ifdef WPM_ENABLE
+        // Write WPM
+        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
+        /* oled_write_P(PSTR("\n"), false); */
+        oled_write(wpm_str, false);
+    #endif
+}
+
 static uint8_t zero_bar_count = 0;
 static uint8_t bar_count = 0;
 #define WPM_CUTOFF 20

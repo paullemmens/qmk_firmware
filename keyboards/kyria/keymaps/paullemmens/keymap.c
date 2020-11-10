@@ -216,7 +216,7 @@ void oled_task_user(void) {
         render_kyria_logo();
     }
 }
-#endif
+#endif // OLED_DRIVER_ENABLE
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {

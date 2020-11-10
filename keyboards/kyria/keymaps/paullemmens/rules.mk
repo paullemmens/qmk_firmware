@@ -7,6 +7,7 @@ LEADER_ENABLE = no        # Enable the Leader Key feature
 MOUSEKEY_ENABLE = no
 TAP_DANCE_ENABLE = yes
 UNICODE_ENABLE = no
+WPM_ENABLE = yes
 
 # Bootloader selection
 #   Teensy       halfkay

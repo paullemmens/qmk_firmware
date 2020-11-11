@@ -20,6 +20,7 @@ char wpm_str[10];
 uint16_t wpm_graph_timer = 0;
 
 // Tap dance stuff
+#ifdef TAP_DANCE_ENABLE
 enum {
     TD_5_6,
     TD_6_7,
@@ -34,6 +35,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC),
     [TD_AMPR_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, KC_CIRC)
 };
+#endif
 
 // Personal key definitions:
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)

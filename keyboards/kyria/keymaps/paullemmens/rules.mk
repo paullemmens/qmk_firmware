@@ -9,6 +9,8 @@ TAP_DANCE_ENABLE = no
 UNICODE_ENABLE = no
 WPM_ENABLE = yes
 
+LTO_ENABLE = yes
+
 # Bootloader selection
 #   Teensy       halfkay
 #   Pro Micro    caterina

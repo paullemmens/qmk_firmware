@@ -234,7 +234,7 @@ static void render_wpm_graph(void) {
         return;
     }
 
-    if(get_current_wpm() >= WPM_CUTOFF) {
+    if(timer_elapsed(wpm_graph_timer) > 500) {
         wpm_graph_timer = timer_read();
 
         if(OLED_DISPLAY_HEIGHT == 64)
@@ -307,9 +307,6 @@ static void render_wpm_graph(void) {
             }
             oled_write_raw_byte(bar_segment, (i-1) * OLED_DISPLAY_WIDTH);
         }
-    }
-    else if(get_current_wpm() < WPM_CUTOFF && timer_elapsed(wpm_graph_timer) > 10000) {
-        render_kyria_logo();
     }
 }
 

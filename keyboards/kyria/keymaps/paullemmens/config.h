@@ -18,7 +18,6 @@
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
-  /* #define OLED_SCROLL_TIMEOUT 5000 */
 #endif
 
 #ifdef RGBLIGHT_ENABLE
@@ -44,10 +43,6 @@
 /*     #define RGBLIGHT_SLEEP */
 /* #endif */
 
-// The Leader key allows to flexibly assign macros to key sequences.
-/* #define LEADER_PER_KEY_TIMING */
-/* #define LEADER_TIMEOUT 350 */
-
 // For home row mods
 #define TAPPING_TERM 200
 // Prevent normal rollover on alphas from accidentally triggering mods.
@@ -55,10 +50,6 @@
 /* #define PERMISSIVE_HOLD */
 /* #define TAPPING_FORCE_HOLD */
 #define TAPPING_TOGGLE 2
-
-// Allows to use either side as the master. Look at the documentation for info:
-// https://docs.qmk.fm/#/config_options?id=setting-handedness
-/* #define EE_HANDS */
 
 // Encoder settings.
 // Allows media codes to properly register in macros and rotary encoder code

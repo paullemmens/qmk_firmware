@@ -15,7 +15,12 @@
  */
 #include QMK_KEYBOARD_H
 
+#include <stdio.h>
+char wpm_str[10];
+uint16_t wpm_graph_timer = 0;
+
 // Tap dance stuff
+#ifdef TAP_DANCE_ENABLE
 enum {
     TD_5_6,
     TD_6_7,
@@ -30,6 +35,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_PERC_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_PERC, KC_CIRC),
     [TD_AMPR_CIRC] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, KC_CIRC)
 };
+#endif
 
 // Personal key definitions:
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
@@ -204,16 +210,113 @@ static void render_status(void) {
 
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCR ") : PSTR("    "), false);
+
+    #ifdef WPM_ENABLE
+        // Write WPM
+        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
+        /* oled_write_P(PSTR("\n"), false); */
+        oled_write(wpm_str, false);
+    #endif
+}
+
+static uint8_t zero_bar_count = 0;
+static uint8_t bar_count = 0;
+#define WPM_CUTOFF 20
+
+static void render_wpm_graph(void) {
+    uint8_t bar_height = 0;
+    uint8_t bar_segment = 0;
+
+    if (wpm_graph_timer == 0) {
+        render_kyria_logo();
+        wpm_graph_timer = timer_read();
+        return;
+    }
+
+    if(timer_elapsed(wpm_graph_timer) > 500) {
+        wpm_graph_timer = timer_read();
+
+        if(OLED_DISPLAY_HEIGHT == 64)
+            bar_height = get_current_wpm() / 2;
+        if(OLED_DISPLAY_HEIGHT == 32)
+            bar_height = get_current_wpm() / 4;
+        if(bar_height > OLED_DISPLAY_HEIGHT)
+            bar_height = OLED_DISPLAY_HEIGHT;
+
+        if(bar_height == 0) {
+            // keep track of how many zero bars we have drawn.  If
+            // there is a whole screen worth, turn the display off and
+            // wait until there is something to do
+            if (zero_bar_count > OLED_DISPLAY_WIDTH / 5) {
+                /* oled_off(); */
+                render_kyria_logo();
+                return;
+            }
+            zero_bar_count++;
+        } else
+            zero_bar_count=0;
+
+        oled_pan(false);
+        bar_count++;
+        for (uint8_t i = (OLED_DISPLAY_HEIGHT / 8); i > 0; i--) {
+            if (bar_height > 7) {
+                if (i % 2 == 1 && bar_count % 3 == 0)
+                    bar_segment = 254;
+                else
+                    bar_segment = 255;
+                bar_height -= 8;
+            } else {
+                switch (bar_height) {
+                case 0:
+                    bar_segment = 0;
+                    break;
+
+                case 1:
+                    bar_segment = 128;
+                    break;
+
+                case 2:
+                    bar_segment = 192;
+                    break;
+
+                case 3:
+                    bar_segment = 224;
+                    break;
+
+                case 4:
+                    bar_segment = 240;
+                    break;
+
+                case 5:
+                    bar_segment = 248;
+                    break;
+
+                case 6:
+                    bar_segment = 252;
+                    break;
+
+                case 7:
+                    bar_segment = 254;
+                    break;
+                }
+                bar_height = 0;
+
+                if (i % 2 == 1 && bar_count % 3 == 0)
+                    bar_segment++;
+            }
+            oled_write_raw_byte(bar_segment, (i-1) * OLED_DISPLAY_WIDTH);
+        }
+    }
 }
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        render_kyria_logo();
+        render_wpm_graph();
     }
 }
 #endif // OLED_DRIVER_ENABLE

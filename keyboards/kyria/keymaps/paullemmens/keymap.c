@@ -21,6 +21,10 @@ char wpm_str[10];
 uint16_t wpm_graph_timer = 0;
 #endif
 
+#ifdef VELOCIKEY_ENABLE
+#include "velocikey.h"
+#endif
+
 // Tap dance stuff
 #ifdef TAP_DANCE_ENABLE
 enum {
@@ -191,7 +195,13 @@ static void render_qmk_logo(void) {
 static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+    oled_write_P(PSTR("Kyria rev1.0"), false);
+    #ifdef VELOCIKEY_ENABLE
+    if (velocikey_enabled()) {
+        oled_write("     VLK", false);
+    }
+    #endif
+    oled_write_P(PSTR("\n\n"), false);
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);

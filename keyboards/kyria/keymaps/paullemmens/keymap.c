@@ -14,10 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-
 #include <stdio.h>
+
+#ifdef WPM_ENABLE
 char wpm_str[10];
 uint16_t wpm_graph_timer = 0;
+#endif
 
 // Tap dance stuff
 #ifdef TAP_DANCE_ENABLE

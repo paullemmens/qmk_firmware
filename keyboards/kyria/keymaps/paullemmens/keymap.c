@@ -342,6 +342,7 @@ void oled_task_user(void) {
 #endif // OLED_DRIVER_ENABLE
 
 #ifdef ENCODER_ENABLE
+// Use code from plattfot as example to make layer specifc encoder actions
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         // Volume control

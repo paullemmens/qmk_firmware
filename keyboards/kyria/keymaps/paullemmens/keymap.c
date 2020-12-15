@@ -55,7 +55,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define D_LCTRL     LCTL_T(KC_D)
 #define K_RCTRL     RCTL_T(KC_K)
 #define S__LALT     LALT_T(KC_S)
-#define L__RALT     ALGR_T(KC_L)
+#define L__LALT     LALT_T(KC_L)
 
 enum layers {
     _QWERTY = 0,
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |        |      | LAlt | LCtrl| raise|      |                              | lower| raise| RCtrl| AltGr|      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | RAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * |        | LGui |      |      |LShift|      |      | lower|  | Raise| BS   |      |RShift|      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | LGUI | LAlt | Space| LCtrl| LGui+|  | RCtrl| Enter| Space| AltGr| Menu |
@@ -84,8 +84,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
       KC_TAB,  KC_Q,    KC_W,    KC_E,    LT(_ADJUST, KC_R), KC_T,                                                                              KC_Y,              LT(_ADJUST, KC_U),   KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_ESC,  KC_A,    S__LALT, D_LCTRL, LT(_RAISE, KC_F),  KC_G,                                                                              LT(_LOWER, KC_H),  LT(_RAISE, KC_J),    K_RCTRL, L__RALT, KC_SCLN, KC_QUOT,
-      KC_LSFT, LGUI__Z, KC_X,    KC_C,    V_LSHFT,           KC_B,               TT(_RAISE), SGUI_LWR,     LT(_RAISE, KC_DEL), RALT_T(KC_BSPC), KC_N,              M_RSHFT,             KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+      KC_ESC,  KC_A,    S__LALT, D_LCTRL, LT(_RAISE, KC_F),  KC_G,                                                                              LT(_LOWER, KC_H),  LT(_RAISE, KC_J),    K_RCTRL, L__LALT, KC_SCLN, KC_QUOT,
+      KC_LSFT, LGUI__Z, KC_X,    KC_C,    V_LSHFT,           KC_B,               TT(_RAISE), SGUI_LWR,     LT(_RAISE, KC_DEL), LALT_T(KC_BSPC), KC_N,              M_RSHFT,             KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                  KC_LGUI, KC_LALT,           LT(_LOWER, KC_SPC), KC_LCTRL,   GUI_LWR,      KC_RCTRL,           RSFT_T(KC_ENT),  KC_SPC,            KC_RALT,             KC_APP
     ),
 /*

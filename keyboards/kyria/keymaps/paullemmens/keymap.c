@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      |adjust|      |                              |      |adjust|      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
- * |        |      | LAlt | LCtrl| raise|      |                              | lower| raise| RCtrl| AltGr|      |        |
+ * |        |      | LAlt | LCtrl| raise|      |                              | lower| raise| RCtrl| LAlt |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * |        | LGui |      |      |LShift|      |      | lower|  | Raise| BS   |      |RShift|      |      |      |        |

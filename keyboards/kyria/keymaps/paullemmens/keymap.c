@@ -44,6 +44,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #endif
 
 // Personal key definitions:
+// Very special combinations
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
 #define GUI_LWR     LM(_LOWER, MOD_LGUI)
 // Home row mods
@@ -56,6 +57,16 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define K_RCTRL     RCTL_T(KC_K)
 #define S__LALT     LALT_T(KC_S)
 #define L__LALT     LALT_T(KC_L)
+#define BS_LALT     LALT_T(KC_BSPC)
+#define ENT_RSF     RSFT_T(KC_ENT)
+// Layer toggles
+#define R_ADJST     LT(_ADJUST, KC_R)
+#define F_RAISE     LT(_RAISE, KC_F)
+#define SPC_LWR     LT(_LOWER, KC_SPC)
+#define DEL_RAI     LT(_RAISE, KC_DEL)
+#define H_LOWER     LT(_LOWER, KC_H)
+#define J_RAISE     LT(_RAISE, KC_J)
+#define U_ADJST     LT(_ADJUST, KC_U)
 
 enum layers {
     _QWERTY = 0,
@@ -83,10 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    LT(_ADJUST, KC_R), KC_T,                                                                              KC_Y,              LT(_ADJUST, KC_U),   KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_ESC,  KC_A,    S__LALT, D_LCTRL, LT(_RAISE, KC_F),  KC_G,                                                                              LT(_LOWER, KC_H),  LT(_RAISE, KC_J),    K_RCTRL, L__LALT, KC_SCLN, KC_QUOT,
-      KC_LSFT, LGUI__Z, KC_X,    KC_C,    V_LSHFT,           KC_B,               TT(_RAISE), SGUI_LWR,     LT(_RAISE, KC_DEL), LALT_T(KC_BSPC), KC_N,              M_RSHFT,             KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                                 KC_LGUI, KC_LALT,           LT(_LOWER, KC_SPC), KC_LCTRL,   GUI_LWR,      KC_RCTRL,           RSFT_T(KC_ENT),  KC_SPC,            KC_RALT,             KC_APP
+      KC_TAB,  KC_Q,    KC_W,    KC_E,    R_ADJST, KC_T,                                                               KC_Y,    U_ADJST, KC_I,    KC_O,    KC_P,    KC_BSPC,
+      KC_ESC,  KC_A,    S__LALT, D_LCTRL, F_RAISE, KC_G,                                                               H_LOWER, J_RAISE, K_RCTRL, L__LALT, KC_SCLN, KC_QUOT,
+      KC_LSFT, LGUI__Z, KC_X,    KC_C,    V_LSHFT, KC_B,    TT(_RAISE), SGUI_LWR,  DEL_RAI,  BS_LALT, KC_N,   M_RSHFT, KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                                 KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL,   GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC, KC_RALT, KC_APP
     ),
 /*
  * Lower Layer: F-keys, Numpad

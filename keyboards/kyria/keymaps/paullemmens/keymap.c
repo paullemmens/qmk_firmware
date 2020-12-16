@@ -25,6 +25,11 @@ uint16_t wpm_graph_timer = 0;
 #include "velocikey.h"
 #endif
 
+#ifdef ENCODER_ENABLE
+bool is_alt_tab_active = false;
+uint16_t alt_tab_timer = 0;
+#endif
+
 // Tap dance stuff
 #ifdef TAP_DANCE_ENABLE
 enum {
@@ -350,6 +355,18 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_VOLU);
         } else {
             tap_code(KC_VOLD);
+                // Alt-tab code from https://docs.splitkb.com/hc/en-us/articles/360010513760-How-can-I-use-a-rotary-encoder-
+                if (clockwise) {
+                    if (!is_alt_tab_active) {
+                        is_alt_tab_active = true;
+                        register_code(KC_LALT);
+                    }
+                    alt_tab_timer = timer_read();
+                    tap_code16(KC_TAB);
+                } else {
+                    alt_tab_timer = timer_read();
+                    tap_code16(S(KC_TAB));
+                }
         }
     }
     else if (index == 1) {
@@ -360,5 +377,14 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_PGUP);
         }
     }
+}
+
+void matrix_scan_user(void) {
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 1250) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
 }
 #endif

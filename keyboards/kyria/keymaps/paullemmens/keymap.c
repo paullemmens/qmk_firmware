@@ -372,14 +372,19 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     alt_tab_timer = timer_read();
                     tap_code16(S(KC_TAB));
                 }
+                break;
         }
     }
     else if (index == 1) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_PGDN);
-        } else {
-            tap_code(KC_PGUP);
+        switch (get_highest_layer(layer_state)) {
+            default:
+                // Page up/Page down
+                if (clockwise) {
+                    tap_code(KC_PGDN);
+                } else {
+                    tap_code(KC_PGUP);
+                }
+                break;
         }
     }
 }

@@ -377,6 +377,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
     else if (index == 1) {
         switch (get_highest_layer(layer_state)) {
+            case _RAISE:
+                if (clockwise) {
+                    tap_code16(LGUI(KC_RIGHT));
+                } else {
+                    tap_code16(LGUI(KC_LEFT));
+                }
             default:
                 // Page up/Page down
                 if (clockwise) {

@@ -52,12 +52,14 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define G_LSHFT     LSFT_T(KC_G)
 #define V_LSHFT     LSFT_T(KC_V)
 #define V_LCTRL     LCTL_T(KC_V)
+#define OULCTRL     LCTL_T(ALGR(KC_O))
 #define N_RSHFT     RSFT_T(KC_N)
 #define N_RCTRL     RCTL_T(KC_N)
 #define M_RSHFT     RSFT_T(KC_M)
 #define M_RCTRL     RCTL_T(KC_M)
 #define D_LCTRL     LCTL_T(KC_D)
 #define D_LSHFT     LSFT_T(KC_D)
+#define EALSHFT     LSFT_T(ALGR(KC_E))
 #define K_RCTRL     RCTL_T(KC_K)
 #define K_RSHFT     RSFT_T(KC_K)
 #define S__LALT     LALT_T(KC_S)
@@ -120,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_LOWER] = LAYOUT(
       _______,     KC_F1,   KC_F2,   KC_F3,      KC_F4,      KC_F5,                                          KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_MINS,    KC_EQL,
-      TO(_QWERTY), KC_F11,  KC_F12,  ALGR(KC_E), ALGR(KC_W), ALGR(KC_I),                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_BSLS,
+      TO(_QWERTY), KC_F11,  KC_F12,  EALSHFT,    ALGR(KC_W), ALGR(KC_I),                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_BSLS,
       _______,     KC_F10,  _______, ALGR(KC_P), ALGR(KC_O), ALGR(KC_5), _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,    _______,
                                      _______,    _______,    _______,    _______, _______, _______, _______, _______, _______, _______
     ),

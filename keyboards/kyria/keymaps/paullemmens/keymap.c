@@ -387,6 +387,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     alt_tab_timer = timer_read();
                     tap_code16(KC_TAB);
                 } else {
+                    // TODO: a bit weird: first do clockwise turn so you can counter clockwise to another app, otherwise
+                    // S-tab is sent in the current application. Is also convenient to some degree so ...
                     alt_tab_timer = timer_read();
                     tap_code16(S(KC_TAB));
                 }

@@ -25,6 +25,11 @@ uint16_t wpm_graph_timer = 0;
 #include "velocikey.h"
 #endif
 
+#ifdef ENCODER_ENABLE
+bool is_alt_tab_active = false;
+uint16_t alt_tab_timer = 0;
+#endif
+
 // Tap dance stuff
 #ifdef TAP_DANCE_ENABLE
 enum {
@@ -152,19 +157,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |   VLK  |  !   |  @   |  #   |  $   |  %   |                              |  ^   |   &  |   *  |   (  |  _   |   _    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp | Mute |      |      |        |
+ * |  CAPS  | SAI  | HUI  | VAI  | Eff+ | MOD  |                              | BrDn | BrUp |      |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |  RTOG  |      |      |      |      |      | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      | NumLk|Scrllk|  |Insert|      |      |      |      |
+ *                        | Mute |      |      | NumLk|Scrllk|  |Insert|      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
       VLK_TOG, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                      KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, KC_UNDS,
-      KC_LOCK, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,  KC_BRIU, KC_MUTE, _______, _______, _______,
+      KC_LOCK, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,  KC_BRIU, _______, _______, _______, _______,
       RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
-                                 _______, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______,  _______, _______, _______
+                                 KC_MUTE, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______,  _______, _______, _______
     ),
 // /*
 //  * Layer template
@@ -363,20 +368,57 @@ void oled_task_user(void) {
 // Use code from plattfot as example to make layer specifc encoder actions
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
+        switch (get_highest_layer(layer_state)) {
+            // Volume control
+            case _ADJUST:
+                if (clockwise) {
+                    tap_code(KC_VOLU);
+                } else {
+                    tap_code(KC_VOLD);
+                }
+                break;
+            default:
+                // Alt-tab code from https://docs.splitkb.com/hc/en-us/articles/360010513760-How-can-I-use-a-rotary-encoder-
+                if (clockwise) {
+                    if (!is_alt_tab_active) {
+                        is_alt_tab_active = true;
+                        register_code(KC_LALT);
+                    }
+                    alt_tab_timer = timer_read();
+                    tap_code16(KC_TAB);
+                } else {
+                    alt_tab_timer = timer_read();
+                    tap_code16(S(KC_TAB));
+                }
+                break;
         }
     }
     else if (index == 1) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_PGDN);
-        } else {
-            tap_code(KC_PGUP);
+        switch (get_highest_layer(layer_state)) {
+            case _RAISE:
+                if (clockwise) {
+                    tap_code16(LGUI(KC_RIGHT));
+                } else {
+                    tap_code16(LGUI(KC_LEFT));
+                }
+            default:
+                // Page up/Page down
+                if (clockwise) {
+                    tap_code(KC_PGDN);
+                } else {
+                    tap_code(KC_PGUP);
+                }
+                break;
         }
     }
+}
+
+void matrix_scan_user(void) {
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 1250) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
 }
 #endif

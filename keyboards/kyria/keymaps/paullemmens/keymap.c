@@ -374,7 +374,14 @@ void oled_task_user(void) {
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch (get_highest_layer(layer_state)) {
-            // Volume control
+            // Move and move to windows in i3-wm
+            case _RAISE:
+                if (clockwise) {
+                    tap_code16(LGUI(KC_RIGHT));
+                } else {
+                    tap_code16(LGUI(KC_LEFT));
+                }
+            // Volume control on adjust
             case _ADJUST:
                 if (clockwise) {
                     tap_code(KC_VOLU);
@@ -382,8 +389,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_VOLD);
                 }
                 break;
+            // Alt-tab code from https://docs.splitkb.com/hc/en-us/articles/360010513760-How-can-I-use-a-rotary-encoder-
             default:
-                // Alt-tab code from https://docs.splitkb.com/hc/en-us/articles/360010513760-How-can-I-use-a-rotary-encoder-
                 if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
@@ -402,12 +409,6 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
     else if (index == 1) {
         switch (get_highest_layer(layer_state)) {
-            case _RAISE:
-                if (clockwise) {
-                    tap_code16(LGUI(KC_RIGHT));
-                } else {
-                    tap_code16(LGUI(KC_LEFT));
-                }
             default:
                 // Page up/Page down
                 if (clockwise) {

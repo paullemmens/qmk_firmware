@@ -88,9 +88,9 @@ enum custom_keycodes {
     MT_EACUT,
     MT_RCBR
 };
-#define HOMECTRL LCTL_T(MT_OUMLA)
-#define HOMESHFT LSFT_T(MT_EACUT)
-#define HOMERCBR LCTL_T(MT_RCBR)
+#define OU_LCTL LCTL_T(MT_OUMLA)
+#define EA_LSFT LSFT_T(MT_EACUT)
+#define RB_LCTL LCTL_T(MT_RCBR)
 
 enum layers {
     _QWERTY = 0,
@@ -207,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case HOMECTRL:
+        case OU_LCTL:
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
                     // send advanced keycode, etc.
@@ -220,7 +220,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
-        case HOMESHFT:
+        case EA_LSFT:
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
                     // send advanced keycode, etc.
@@ -233,7 +233,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
-        case HOMERCBR:
+        case RB_LCTL:
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
                     // send advanced keycode, etc.

@@ -53,6 +53,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
 #define GUI_LWR     LM(_LOWER, MOD_LGUI)
 #define O_ACUTE     ALGR(KC_P)
+#define O_UMLAU     ALGR(KC_O)
+#define E_ACUTE     ALGR(KC_E)
 #define E_UMLAU     ALGR(KC_W)
 #define I_UMLAU     ALGR(KC_I)
 #define EURO        ALGR(KC_5)

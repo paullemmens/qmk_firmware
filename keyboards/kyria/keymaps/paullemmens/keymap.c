@@ -61,15 +61,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define G_LSHFT     LSFT_T(KC_G)
 #define V_LSHFT     LSFT_T(KC_V)
 #define V_LCTRL     LCTL_T(KC_V)
-#define OULCTRL     LCTL_T(ALGR(KC_O))
-#define RBRLCTL     LCTL_T(KC_RCBR)
 #define N_RSHFT     RSFT_T(KC_N)
 #define N_RCTRL     RCTL_T(KC_N)
 #define M_RSHFT     RSFT_T(KC_M)
 #define M_RCTRL     RCTL_T(KC_M)
 #define D_LCTRL     LCTL_T(KC_D)
 #define D_LSHFT     LSFT_T(KC_D)
-#define EALSHFT     LSFT_T(ALGR(KC_E))
 #define K_RCTRL     RCTL_T(KC_K)
 #define K_RSHFT     RSFT_T(KC_K)
 #define S__LALT     LALT_T(KC_S)
@@ -84,6 +81,16 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define H_LOWER     LT(_LOWER, KC_H)
 #define J_RAISE     LT(_RAISE, KC_J)
 #define U_ADJST     LT(_ADJUST, KC_U)
+
+// https://precondition.github.io/home-row-mods#using-non-basic-keycodes-in-mod-taps
+enum custom_keycodes {
+    MT_OUMLA = SAFE_RANGE,
+    MT_EACUT,
+    MT_RCBR
+};
+#define HOMECTRL LCTL_T(MT_OUMLA)
+#define HOMESHFT LSFT_T(MT_EACUT)
+#define HOMERCBR LCTL_T(MT_RCBR)
 
 enum layers {
     _QWERTY = 0,
@@ -196,6 +203,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HOMECTRL:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    // send advanced keycode, etc.
+                    // the 16 bit version of the `tap_code` function is used here
+                    // because KC_HASH is a non-basic keycode.
+                    tap_code16(ALGR(KC_O));
+                }
+                // do not continue with default tap action
+                // if the MT was pressed or released, but not held
+                return false;
+            }
+            break;
+        case HOMESHFT:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    // send advanced keycode, etc.
+                    // the 16 bit version of the `tap_code` function is used here
+                    // because KC_HASH is a non-basic keycode.
+                    tap_code16(ALGR(KC_E));
+                }
+                // do not continue with default tap action
+                // if the MT was pressed or released, but not held
+                return false;
+            }
+            break;
+        case HOMERCBR:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    // send advanced keycode, etc.
+                    // the 16 bit version of the `tap_code` function is used here
+                    // because KC_HASH is a non-basic keycode.
+                    tap_code16(KC_RCBR);
+                }
+                // do not continue with default tap action
+                // if the MT was pressed or released, but not held
+                return false;
+            }
+            break;
+    }
+
+    return true;
 };
 
 #ifdef OLED_DRIVER_ENABLE

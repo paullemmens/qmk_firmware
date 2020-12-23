@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      |adjust|      |                              |      |adjust|      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
- * |        |      | LAlt | LShft| raise|      |                              | lower| raise|RShift| LAlt |      |        |
+ * |        |      |      | LShft| raise|      |                              | lower| raise|RShift|      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * |        | LGui |      |      | LCtrl|      |      | lower|  | Raise| BS   | RCtrl|      |      |      |      |        |
@@ -118,10 +118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    R_ADJST, KC_T,                                              KC_Y,    U_ADJST, KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_ESC,  KC_A,    S__LALT, D_LSHFT, F_RAISE, KC_G,                                              H_LOWER, J_RAISE, K_RSHFT, L__LALT, KC_SCLN, KC_QUOT,
-      KC_LSFT, LGUI__Z, KC_X,    KC_C,    V_LCTRL, KC_B,    TT(_RAISE), SGUI_LWR,  DEL_RAI,  BS_LALT, N_RCTRL, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                                 KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL,   GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
+      KC_TAB,  KC_Q,    KC_W, KC_E,    R_ADJST, KC_T,                                              KC_Y,    U_ADJST, KC_I,    KC_O,   KC_P,    KC_BSPC,
+      KC_ESC,  KC_A,    KC_S, D_LSHFT, F_RAISE, KC_G,                                              H_LOWER, J_RAISE, K_RSHFT, KC_L,   KC_SCLN, KC_QUOT,
+      KC_LSFT, LGUI__Z, KC_X, KC_C,    V_LCTRL, KC_B,    TT(_RAISE), SGUI_LWR,  DEL_RAI,  BS_LALT, N_RCTRL, KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                              KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL,   GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
     ),
 /*
  * Lower Layer: F-keys, Numpad

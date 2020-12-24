@@ -436,6 +436,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 } else {
                     tap_code16(LGUI(KC_LEFT));
                 }
+                break;
             // Volume control on adjust
             case _ADJUST:
                 if (clockwise) {

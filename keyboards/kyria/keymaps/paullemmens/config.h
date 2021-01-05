@@ -38,7 +38,7 @@
 #endif
 
 // For home row mods
-#define TAPPING_TERM 250
+#define TAPPING_TERM 165
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD

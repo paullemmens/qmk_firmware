@@ -207,6 +207,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     ),
 };
 
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case K_RSHFT:
+            return TAPPING_TERM + 75;
+        case J_RAISE:
+            return TAPPING_TERM + 25;
+        case N_RCTRL:
+        case M_RCTRL:
+            return TAPPING_TERM + 100;
+        default:
+            return TAPPING_TERM;
+    }
+}
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OU_LCTL:

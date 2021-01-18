@@ -58,6 +58,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define E_UMLAU     ALGR(KC_W)
 #define I_UMLAU     ALGR(KC_I)
 #define EURO        ALGR(KC_5)
+#define _ACUTE_     ALGR(KC_QUOTE)
+#define _GRAVE_     ALGR(KC_GRAVE)
+#define _UMLAU_     ALGR(S(KC_QUOTE))
+#define _CIRCFL     ALGR(KC_CIRC)
 // Home row mods
 #define LGUI__Z     LGUI_T(KC_Z)
 #define G_LSHFT     LSFT_T(KC_G)
@@ -131,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  |                              |  F6  |  F7  |  F8  |  F9  | - _  |  = +   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  F11 |  F12 |   é  |   ë  |   ï  |                              | Left | Down |  Up  | Right|  |   |  \ |   |
+ * |        |  F11 |  F12 |   é  |   ë  |   ô  |                              | Left | Down |  Up  | Right|  |   |  \ |   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  F10 |      |   ó  |   ö  |   €  |      |      |  |      |      | Home | PgDn | PgUp |  End |      |        |
+ * |        |  F10 |  ò   |   ó  |   ö  |   €  |      |      |  |      |      | Home | PgDn | PgUp |  End |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -141,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_LOWER] = LAYOUT(
       _______,     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_MINS,    KC_EQL,
-      TO(_QWERTY), KC_F11,  KC_F12,  EA_LSFT, E_UMLAU, I_UMLAU,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_BSLS,
-      _______,     KC_F10,  _______, O_ACUTE, OU_LCTL, EURO,    _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,    _______,
+      TO(_QWERTY), KC_F11,  KC_F12,  EA_LSFT, E_UMLAU, _CIRCFL,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, S(KC_BSLS), KC_BSLS,
+      _______,     KC_F10,  _GRAVE_, _ACUTE_, OU_LCTL, EURO,    _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,    _______,
                                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
@@ -231,7 +235,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     // send advanced keycode, etc.
                     // the 16 bit version of the `tap_code` function is used here
                     // because KC_HASH is a non-basic keycode.
-                    tap_code16(ALGR(KC_O));
+                    tap_code16(ALGR(S(KC_QUOTE)));
                 }
                 // do not continue with default tap action
                 // if the MT was pressed or released, but not held

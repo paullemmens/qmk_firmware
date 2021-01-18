@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include <stdio.h>
 
 #ifdef WPM_ENABLE
+#include <stdio.h>
 char wpm_str[10];
 uint16_t wpm_graph_timer = 0;
 #endif
@@ -345,6 +345,7 @@ static void render_status(void) {
     #endif
 }
 
+#ifdef WPM_ENABLE
 static uint8_t zero_bar_count = 0;
 static uint8_t bar_count = 0;
 #define WPM_CUTOFF 20
@@ -434,12 +435,17 @@ static void render_wpm_graph(void) {
         }
     }
 }
+#endif // WPM_ENABLE
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        render_wpm_graph();
+        #ifdef WPM_ENABLE
+            render_wpm_graph();
+        #else
+            render_kyria_logo();
+        #endif
     }
 }
 #endif // OLED_DRIVER_ENABLE

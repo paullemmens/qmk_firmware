@@ -41,3 +41,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     #define RGBLIGHT_SPLIT
 #endif
 
+#define TAPPING_TERM 175
+#define TAPPING_TERM_PER_KEY
+// Prevent normal rollover on alphas from accidentally triggering mods.
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
+
+/* #define TAPPING_FORCE_HOLD */
+#define TAPPING_TOGGLE 2

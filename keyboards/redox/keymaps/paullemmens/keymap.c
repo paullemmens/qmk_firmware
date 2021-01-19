@@ -90,29 +90,30 @@ enum custom_keycodes {
 
 // Shortcut to make keymap more readable
 #define RAISE_L MO(_RAISE)
+#define T_RAI_L TT(_RAISE)
+#define KC_RASP LT(_RAISE, KC_SPC)
+#define KC_RALB LT(_RAISE, KC_LBRC)
+#define KC_RARB LT(_RAISE, KC_RBRC)
 
-#define KC_ALAS LALT_T(KC_PAST)
 #define KC_CTPL LCTL_T(KC_BSLS)
 
-#define KC_NAGR LT(_NAV, KC_GRV)
-#define KC_NAMI LT(_NAV, KC_MINS)
 
-#define KC_ADEN LT(_ADJUST, KC_END)
-#define KC_ADPU LT(_ADJUST, KC_PGUP)
+#define KC_ADJ6 LT(_ADJUST, KC_6)
+#define KC_ADSL LT(_ADJUST, KC_BSLS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_NAGR ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_NAMI ,
+     KC_ESC  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_NAMI ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,SYM_L   ,                          SYM_L   ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_EQL  ,
+     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,R_ADJUST,KC_T    ,KC_ADJ6 ,                          KC_ADSL ,KC_Y    ,U_ADJST ,KC_I    ,KC_O    ,KC_P    ,KC_BSPC ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_LBRC ,                          KC_RBRC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT ,
+     KC_ESC  ,KC_A    ,KC_S    ,D_LSHFT ,F_RAISE ,KC_G    ,KC_RALB ,                          KC_RARB ,H_LOWER ,J_RAISE ,K_RSHFT ,KC_L    ,KC_SCLN ,KC_QUOT ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_ADPU ,KC_PGDN ,        KC_HOME ,KC_ADEN ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
+     KC_LSFT ,LGUI__Z ,KC_X    ,KC_C    ,V_LCTRL ,KC_B    ,T_RAIS_L,SGUI_LWR,        DEL_RAI ,KC_ADEN ,KC_N    ,M_RCTRL ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LGUI ,KC_PPLS ,KC_PMNS ,KC_ALAS ,     KC_CTPL ,    KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,    KC_RALT ,     KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT 
+     KC_LCTRL,RAISE_L ,KC_LGUI ,KC_LALT ,     KC_RASP ,    KC_LCTRL,GUI_LWR ,        KC_RCTRL,ENT_RSF ,    KC_SPC  ,     KC_RALT ,KC_APP  ,KC_RCTRL,RAISE_L
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 

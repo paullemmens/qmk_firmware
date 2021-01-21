@@ -66,7 +66,11 @@ qmk_tap_dance_action_t tap_dance_actions[] = {
 enum custom_keycodes {
     MT_OUMLA = SAFE_RANGE,
     MT_EACUT,
-    MT_RCBR
+    MT_RCBR,
+    QWERTY,
+    LOWER,
+    RAISE,
+    ADJUST,
 };
 #define OU_LCTL LCTL_T(MT_OUMLA)
 #define EA_LSFT LSFT_T(MT_EACUT)
@@ -80,13 +84,6 @@ enum custom_keycodes {
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST,
-};
 
 // Shortcut to make keymap more readable
 #define RAISE_L MO(_RAISE)

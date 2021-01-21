@@ -92,9 +92,6 @@ enum custom_keycodes {
 #define KC_RALB LT(_RAISE, KC_LBRC)
 #define KC_RARB LT(_RAISE, KC_RBRC)
 
-#define KC_CTPL LCTL_T(KC_BSLS)
-
-
 #define KC_ADJ6 LT(_ADJUST, KC_6)
 #define KC_ADSL LT(_ADJUST, KC_BSLS)
 

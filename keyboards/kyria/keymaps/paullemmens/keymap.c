@@ -64,13 +64,16 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define _CIRCFL     ALGR(KC_CIRC)
 // Home row mods
 #define LGUI__Z     LGUI_T(KC_Z)
+#define Z_LCTRL     LCTL_T(KC_Z)
 #define G_LSHFT     LSFT_T(KC_G)
 #define V_LSHFT     LSFT_T(KC_V)
 #define V_LCTRL     LCTL_T(KC_V)
+#define V__LCMD     LCMD_T(KC_V)
 #define N_RSHFT     RSFT_T(KC_N)
 #define N_RCTRL     RCTL_T(KC_N)
 #define M_RSHFT     RSFT_T(KC_M)
 #define M_RCTRL     RCTL_T(KC_M)
+#define M__RCMD     RCMD_T(KC_M)
 #define D_LCTRL     LCTL_T(KC_D)
 #define D_LSHFT     LSFT_T(KC_D)
 #define K_RCTRL     RCTL_T(KC_K)
@@ -84,9 +87,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define F_RAISE     LT(_RAISE, KC_F)
 #define SPC_LWR     LT(_LOWER, KC_SPC)
 #define DEL_RAI     LT(_RAISE, KC_DEL)
+#define ESC_RAI     LT(_RAISE, KC_ESC)
 #define H_LOWER     LT(_LOWER, KC_H)
+#define G_LOWER     LT(_LOWER, KC_G)
 #define J_RAISE     LT(_RAISE, KC_J)
 #define U_ADJST     LT(_ADJUST, KC_U)
+#define MACOS_L     DF(_MACOS)
+#define DEFAU_L     DF(_QWERTY)
 
 // https://precondition.github.io/home-row-mods#using-non-basic-keycodes-in-mod-taps
 enum custom_keycodes {
@@ -100,6 +107,7 @@ enum custom_keycodes {
 
 enum layers {
     _QWERTY = 0,
+    _MACOS,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -114,20 +122,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      |adjust|      |                              |      |adjust|      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
- * |        |      |      | LShft| raise|      |                              | lower| raise|RShift|      |      |        |
+ * |        |      |      | LShft| raise|lower |                              | lower| raise|RShift|      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
- * |        | LGui |      |      | LCtrl|      |      | lower|  | Raise| BS   |      | RCtrl|      |      |      |        |
+ * | LShift |   Z  |   X  |  C   |   V  |   B  | Esc  |SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * |        | LGui |      |      | LCtrl|      | Raise| lower|  | Raise| BS   |      | RCtrl|      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | LGUI | LAlt | Space| LCtrl| LGui+|  | RCtrl| Enter| Space| AltGr| Menu |
  *                        |      |      | lower|      | lower|  |      |RSHift|      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_TAB,  KC_Q,    KC_W, KC_E,    R_ADJST, KC_T,                                              KC_Y,    U_ADJST, KC_I,    KC_O,   KC_P,    KC_BSPC,
-      KC_ESC,  KC_A,    KC_S, D_LSHFT, F_RAISE, KC_G,                                              H_LOWER, J_RAISE, K_RSHFT, KC_L,   KC_SCLN, KC_QUOT,
-      KC_LSFT, LGUI__Z, KC_X, KC_C,    V_LCTRL, KC_B,    TT(_RAISE), SGUI_LWR,  DEL_RAI,  BS_LALT, KC_N,    M_RCTRL,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                              KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL,   GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
+      KC_TAB,  KC_Q,    KC_W, KC_E,    R_ADJST, KC_T,                                            KC_Y,    U_ADJST, KC_I,    KC_O,   KC_P,    KC_BSPC,
+      KC_ESC,  KC_A,    KC_S, D_LSHFT, F_RAISE, G_LOWER,                                         H_LOWER, J_RAISE, K_RSHFT, KC_L,   KC_SCLN, KC_QUOT,
+      KC_LSFT, LGUI__Z, KC_X, KC_C,    V_LCTRL, KC_B,    ESC_RAI,  SGUI_LWR,  DEL_RAI,  BS_LALT, KC_N,    M_RCTRL, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                              KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL, GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
+    ),
+/*
+ * MacOS: specific keys
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |  Z   |      |      |  V   |      |      |      |  |      |      |      |  M   |      |      |      |        |
+ * |        | Ctrl |      |      | Cmd  |      |      |      |  |      |      |      | Cmd  |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |Option|      | Cmd  |      |  | Cmd  |      |      | RCtrl|      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_MACOS] = LAYOUT(
+      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, Z_LCTRL, _______, _______, V__LCMD, _______, _______, _______, _______, _______, _______, M__RCMD, _______, _______, _______, _______,
+                                 _______, KC_LOPT, _______, KC_LCMD, _______, KC_RCMD, _______, _______, KC_RCTL, _______
     ),
 /*
  * Lower Layer: F-keys, Numpad
@@ -179,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |  RTOG  |      |      |      |      |      | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Mute |      |      | NumLk|Scrllk|  |Insert|      |      |      |      |
+ *                        | Mute |      |      | NumLk|Scrllk|  |Insert| OSX  | QWERT|      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -187,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       VLK_TOG, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                      KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, KC_UNDS,
       KC_LOCK, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,  KC_BRIU, _______, _______, _______, _______,
       RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
-                                 KC_MUTE, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______,  _______, _______, _______
+                                 KC_MUTE, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  MACOS_L,  DEFAU_L,  _______, _______
     ),
 // /*
 //  * Layer template
@@ -505,7 +534,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 1250) {
+    if (timer_elapsed(alt_tab_timer) > 750) {
       unregister_code(KC_LALT);
       is_alt_tab_active = false;
     }

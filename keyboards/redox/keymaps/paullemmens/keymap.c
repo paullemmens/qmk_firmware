@@ -88,7 +88,7 @@ enum custom_keycodes {
 // Shortcut to make keymap more readable
 #define RAISE_L MO(_RAISE)
 #define T_RAI_L TT(_RAISE)
-#define KC_RASP LT(_RAISE, KC_SPC)
+#define KC_LOSP LT(_LOWER, KC_SPC)
 #define KC_RALB LT(_RAISE, KC_LBRC)
 #define KC_RARB LT(_RAISE, KC_RBRC)
 
@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,LGUI__Z ,KC_X    ,KC_C    ,V_LCTRL ,KC_B    ,T_RAI_L ,SGUI_LWR,        DEL_RAI ,BS_LALT ,KC_N    ,M_RCTRL ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LCTRL,RAISE_L ,KC_LGUI ,KC_LALT ,     KC_RASP ,    KC_LCTRL,GUI_LWR ,        KC_RCTRL,ENT_RSF ,    KC_SPC  ,     KC_RALT ,KC_APP  ,KC_RCTRL,RAISE_L
+     KC_LCTRL,RAISE_L ,KC_LGUI ,KC_LALT ,     KC_LOSP ,    KC_LCTRL,GUI_LWR ,        KC_RCTRL,ENT_RSF ,    KC_SPC  ,     KC_RALT ,KC_APP  ,KC_RCTRL,RAISE_L
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 

@@ -355,9 +355,15 @@ static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
     oled_write_P(PSTR("Kyria rev1.0"), false);
+    if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+        oled_write_P(PSTR(" OSX"), false);
+    }
+    else {
+        oled_write_P(PSTR("    "), false);
+    }
     #ifdef VELOCIKEY_ENABLE
     if (velocikey_enabled()) {
-        oled_write("     VLK", false);
+        oled_write_P(PSTR(" VLK"), false);
     }
     #endif
     oled_write_P(PSTR("\n\n"), false);

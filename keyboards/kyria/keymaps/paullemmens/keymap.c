@@ -18,6 +18,8 @@
 #ifdef WPM_ENABLE
 #include <stdio.h>
 char wpm_str[10];
+#endif
+#ifdef WPM_GRAPH
 uint16_t wpm_graph_timer = 0;
 #endif
 
@@ -64,13 +66,17 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define _CIRCFL     ALGR(KC_CIRC)
 // Home row mods
 #define LGUI__Z     LGUI_T(KC_Z)
+#define Z_LCTRL     LCTL_T(KC_Z)
 #define G_LSHFT     LSFT_T(KC_G)
 #define V_LSHFT     LSFT_T(KC_V)
 #define V_LCTRL     LCTL_T(KC_V)
+#define B_LCTRL     LCTL_T(KC_B)
+#define V__LCMD     LCMD_T(KC_V)
 #define N_RSHFT     RSFT_T(KC_N)
 #define N_RCTRL     RCTL_T(KC_N)
 #define M_RSHFT     RSFT_T(KC_M)
 #define M_RCTRL     RCTL_T(KC_M)
+#define M__RCMD     RCMD_T(KC_M)
 #define D_LCTRL     LCTL_T(KC_D)
 #define D_LSHFT     LSFT_T(KC_D)
 #define K_RCTRL     RCTL_T(KC_K)
@@ -84,9 +90,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define F_RAISE     LT(_RAISE, KC_F)
 #define SPC_LWR     LT(_LOWER, KC_SPC)
 #define DEL_RAI     LT(_RAISE, KC_DEL)
+#define ESC_RAI     LT(_RAISE, KC_ESC)
 #define H_LOWER     LT(_LOWER, KC_H)
+#define G_LOWER     LT(_LOWER, KC_G)
 #define J_RAISE     LT(_RAISE, KC_J)
 #define U_ADJST     LT(_ADJUST, KC_U)
+#define MACOS_L     DF(_MACOS)
+#define DEFAU_L     DF(_QWERTY)
 
 // https://precondition.github.io/home-row-mods#using-non-basic-keycodes-in-mod-taps
 enum custom_keycodes {
@@ -100,6 +110,7 @@ enum custom_keycodes {
 
 enum layers {
     _QWERTY = 0,
+    _MACOS,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -114,20 +125,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |      |      |      |adjust|      |                              |      |adjust|      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  ESC   |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
- * |        |      |      | LShft| raise|      |                              | lower| raise|RShift|      |      |        |
+ * |        |      |      | LShft| raise|lower |                              | lower| raise|RShift|      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |  C   |   V  |   B  | RAISE|SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
- * |        | LGui |      |      | LCtrl|      |      | lower|  | Raise| BS   |      | RCtrl|      |      |      |        |
+ * | LShift |   Z  |   X  |  C   |   V  |   B  | Esc  |SLGui+|  | Del  | LAlt |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * |        | LGui |      |      | LCtrl|      | Raise| lower|  | Raise| BS   |      | RCtrl|      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | LGUI | LAlt | Space| LCtrl| LGui+|  | RCtrl| Enter| Space| AltGr| Menu |
  *                        |      |      | lower|      | lower|  |      |RSHift|      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_TAB,  KC_Q,    KC_W, KC_E,    R_ADJST, KC_T,                                              KC_Y,    U_ADJST, KC_I,    KC_O,   KC_P,    KC_BSPC,
-      KC_ESC,  KC_A,    KC_S, D_LSHFT, F_RAISE, KC_G,                                              H_LOWER, J_RAISE, K_RSHFT, KC_L,   KC_SCLN, KC_QUOT,
-      KC_LSFT, LGUI__Z, KC_X, KC_C,    V_LCTRL, KC_B,    TT(_RAISE), SGUI_LWR,  DEL_RAI,  BS_LALT, KC_N,    M_RCTRL,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                              KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL,   GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
+      KC_TAB,  KC_Q,    KC_W, KC_E,    R_ADJST, KC_T,                                            KC_Y,    U_ADJST, KC_I,    KC_O,   KC_P,    KC_BSPC,
+      KC_ESC,  KC_A,    KC_S, D_LSHFT, F_RAISE, G_LOWER,                                         H_LOWER, J_RAISE, K_RSHFT, KC_L,   KC_SCLN, KC_QUOT,
+      KC_LSFT, LGUI__Z, KC_X, KC_C,    V_LCTRL, KC_B,    ESC_RAI,  SGUI_LWR,  DEL_RAI,  BS_LALT, KC_N,    M_RCTRL, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                              KC_LGUI, KC_LALT, SPC_LWR, KC_LCTRL, GUI_LWR,   KC_RCTRL, ENT_RSF, KC_SPC,  KC_RALT, KC_APP
+    ),
+/*
+ * MacOS: specific keys
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |      |      |      |  V   |  B   |      |      |  |      |      |  N   |  M   |      |      |      |        |
+ * |        |      |      |      | Cmd  | Ctrl |      |      |  |      |      | RCtrl| Cmd  |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |Option|      | Cmd  |      |  | Cmd  |      |      | RAlt|      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_MACOS] = LAYOUT(
+      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, V__LCMD, B_LCTRL, _______, _______, _______, _______, N_RCTRL, M__RCMD, _______, _______, _______, _______,
+                                 _______, KC_LOPT, _______, KC_LCMD, _______, KC_RCMD, _______, _______, KC_RALT, _______
     ),
 /*
  * Lower Layer: F-keys, Numpad
@@ -179,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |  RTOG  |      |      |      |      |      | RGB P| RGB B|  | RGB R|RGB SW|RGB SN| RGB K| RGB X| RGB G| RGB T|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Mute |      |      | NumLk|Scrllk|  |Insert|      |      |      |      |
+ *                        | Mute |      |      | NumLk|Scrllk|  |Insert| OSX  | QWERT|      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -187,7 +219,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       VLK_TOG, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                      KC_CIRC,  KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, KC_UNDS,
       KC_LOCK, RGB_SAI, RGB_HUI, RGB_VAI, RGB_SPI, RGB_MOD,                                      KC_BRID,  KC_BRIU, _______, _______, _______, _______,
       RGB_TOG, _______, _______, _______, _______, _______, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, _______,
-                                 KC_MUTE, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  _______,  _______, _______, _______
+                                 KC_MUTE, _______, _______, KC_NLCK, KC_SLCK, KC_INS,  MACOS_L,  DEFAU_L,  _______, _______
     ),
 // /*
 //  * Layer template
@@ -268,6 +300,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
+        case KC_HOME:
+            if (IS_LAYER_ON(_MACOS)) {
+                if (record->event.pressed) {
+                    tap_code16(LCMD(KC_LEFT));
+                }
+                return false;
+            }
+            return true;
+            break;
+        case KC_END:
+            if (IS_LAYER_ON(_MACOS)) {
+                if (record->event.pressed) {
+                    tap_code16(LCMD(KC_RIGHT));
+                }
+                return false;
+            }
+            return true;
+            break;
+        default:
+            return true;
     }
 
     return true;
@@ -275,7 +327,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-	return OLED_ROTATION_180;
+    return OLED_ROTATION_180;
 }
 
 static void render_kyria_logo(void) {
@@ -305,9 +357,15 @@ static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
     oled_write_P(PSTR("Kyria rev1.0"), false);
+    if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+        oled_write_P(PSTR(" OSX"), false);
+    }
+    else {
+        oled_write_P(PSTR("    "), false);
+    }
     #ifdef VELOCIKEY_ENABLE
     if (velocikey_enabled()) {
-        oled_write("     VLK", false);
+        oled_write_P(PSTR(" VLK"), false);
     }
     #endif
     oled_write_P(PSTR("\n\n"), false);
@@ -345,7 +403,7 @@ static void render_status(void) {
     #endif
 }
 
-#ifdef WPM_ENABLE
+#ifdef WPM_GRAPH
 static uint8_t zero_bar_count = 0;
 static uint8_t bar_count = 0;
 #define WPM_CUTOFF 20
@@ -435,13 +493,13 @@ static void render_wpm_graph(void) {
         }
     }
 }
-#endif // WPM_ENABLE
+#endif // WPM_GRAPH
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        #ifdef WPM_ENABLE
+        #ifdef WPM_GRAPH
             render_wpm_graph();
         #else
             render_kyria_logo();
@@ -458,9 +516,21 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             // Move and move to windows in i3-wm
             case _RAISE:
                 if (clockwise) {
-                    tap_code16(LGUI(KC_RIGHT));
+                    /* if (get_highest_layer(layer_state|default_layer_state) == _MACOS) { */
+                    if (IS_LAYER_ON(_MACOS)) {
+                        tap_code16(LCTL(LOPT(LCMD(KC_RIGHT))));
+                    }
+                    else {
+                        tap_code16(LGUI(KC_RIGHT));
+                    }
                 } else {
-                    tap_code16(LGUI(KC_LEFT));
+                    /* if (get_highest_layer(layer_state|default_layer_state) == _MACOS) { */
+                    if (IS_LAYER_ON(_MACOS)) {
+                        tap_code16(LCTL(LOPT(LCMD(KC_LEFT))));
+                    }
+                    else {
+                        tap_code16(LGUI(KC_LEFT));
+                    }
                 }
                 break;
             // Volume control on adjust
@@ -476,7 +546,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
-                        register_code(KC_LALT);
+                        if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+                            register_code(KC_LCMD);
+                        }
+                        else {
+                            register_code(KC_LALT);
+                        }
                     }
                     alt_tab_timer = timer_read();
                     tap_code16(KC_TAB);
@@ -505,8 +580,13 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 1250) {
-      unregister_code(KC_LALT);
+    if (timer_elapsed(alt_tab_timer) > 750) {
+      if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+          unregister_code(KC_LCMD);
+      }
+      else {
+          unregister_code(KC_LALT);
+      }
       is_alt_tab_active = false;
     }
   }

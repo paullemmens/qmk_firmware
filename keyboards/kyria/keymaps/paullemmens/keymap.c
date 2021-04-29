@@ -508,9 +508,21 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             // Move and move to windows in i3-wm
             case _RAISE:
                 if (clockwise) {
-                    tap_code16(LGUI(KC_RIGHT));
+                    /* if (get_highest_layer(layer_state|default_layer_state) == _MACOS) { */
+                    if (IS_LAYER_ON(_MACOS)) {
+                        tap_code16(LCTL(LOPT(LCMD(KC_RIGHT))));
+                    }
+                    else {
+                        tap_code16(LGUI(KC_RIGHT));
+                    }
                 } else {
-                    tap_code16(LGUI(KC_LEFT));
+                    /* if (get_highest_layer(layer_state|default_layer_state) == _MACOS) { */
+                    if (IS_LAYER_ON(_MACOS)) {
+                        tap_code16(LCTL(LOPT(LCMD(KC_LEFT))));
+                    }
+                    else {
+                        tap_code16(LGUI(KC_LEFT));
+                    }
                 }
                 break;
             // Volume control on adjust

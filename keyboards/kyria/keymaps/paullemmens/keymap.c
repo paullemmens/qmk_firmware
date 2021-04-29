@@ -298,6 +298,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
+        case KC_HOME:
+            if (IS_LAYER_ON(_MACOS)) {
+                if (record->event.pressed) {
+                    tap_code16(LCMD(KC_LEFT));
+                }
+                return false;
+            }
+            return true;
+            break;
+        case KC_END:
+            if (IS_LAYER_ON(_MACOS)) {
+                if (record->event.pressed) {
+                    tap_code16(LCMD(KC_RIGHT));
+                }
+                return false;
+            }
+            return true;
+            break;
+        default:
+            return true;
     }
 
     return true;

@@ -18,6 +18,8 @@
 #ifdef WPM_ENABLE
 #include <stdio.h>
 char wpm_str[10];
+#endif
+#ifdef WPM_GRAPH
 uint16_t wpm_graph_timer = 0;
 #endif
 
@@ -401,7 +403,7 @@ static void render_status(void) {
     #endif
 }
 
-#ifdef WPM_ENABLE
+#ifdef WPM_GRAPH
 static uint8_t zero_bar_count = 0;
 static uint8_t bar_count = 0;
 #define WPM_CUTOFF 20
@@ -491,13 +493,13 @@ static void render_wpm_graph(void) {
         }
     }
 }
-#endif // WPM_ENABLE
+#endif // WPM_GRAPH
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
-        #ifdef WPM_ENABLE
+        #ifdef WPM_GRAPH
             render_wpm_graph();
         #else
             render_kyria_logo();

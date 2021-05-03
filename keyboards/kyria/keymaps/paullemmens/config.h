@@ -16,36 +16,44 @@
 
 #pragma once
 
+/* #define WPM_GRAPH */
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-  #define RGBLIGHT_ANIMATIONS
+  /* #define RGBLIGHT_ANIMATIONS */
+  #define RGBLIGHT_EFFECT_STATIC_LIGHT
+  /* #define RGBLIGHT_EFFECT_BREATHING */
+  #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+  #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+  /* #define RGBLIGHT_EFFECT_STATIC_GRADIENT */
   #define RGBLIGHT_HUE_STEP 8
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
+  #define RGBLIGHT_LIMIT_VAL 190
   #define RGBLIGHT_SLEEP
+  #define RGBLIGHT_SPLIT
+  #define RGBLIGHT_LED_MAP {0,1,2,9,8,7,4,3,5,6,19,18,17,10,11,12,15,16,14,13} // Orients Kyria LEDs to a circle around both halves.
+  //#define RBGLIGHT_LED_MAP {9,8,6,7,5,3,2,4,1,0,10,12,13,11,14,16,17,15,18,19} // Orients Kyria LEDs for a left half-right half columnar progression.
 #endif
 
-// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
-// #define SPLIT_USB_DETECT
-// #define NO_USB_STARTUP_CHECK
+// For home row mods
+#define TAPPING_TERM 175
+#define TAPPING_TERM_PER_KEY
+// Prevent normal rollover on alphas from accidentally triggering mods.
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
 
+/* #define TAPPING_FORCE_HOLD */
+#define TAPPING_TOGGLE 2
+
+// Encoder settings.
+// Allows media codes to properly register in macros and rotary encoder code
+#define TAP_CODE_DELAY 10
+#define ENCODER_DIRECTION_FLIP
 // EC11K encoders have a different resolution than other EC11 encoders.
 // When using the default resolution of 4, if you notice your encoder skipping
 // every other tick, lower the resolution to 2.
-/* #define ENCODER_RESOLUTION 2 */
-
-// The Leader key allows to flexibly assign macros to key sequences.
-#define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 350
-
-#define TAPPING_TERM 200
-
-// Allows to use either side as the master. Look at the documentation for info:
-// https://docs.qmk.fm/#/config_options?id=setting-handedness
-/* #define EE_HANDS */
-
-// Allows media codes to properly register in macros and rotary encoder code
-#define TAP_CODE_DELAY 10
+#define ENCODER_RESOLUTION 2

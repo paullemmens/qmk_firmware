@@ -18,6 +18,11 @@
 
 /* #define WPM_GRAPH */
 
+// This helps reduce firmware size due to various changes in qmk toolchain that
+// introduce bloat.
+// https://discord.com/channels/440868230475677696/473506116718952450/838843625084944414
+#define LAYER_STATE_8BIT
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif

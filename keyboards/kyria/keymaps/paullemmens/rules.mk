@@ -11,6 +11,11 @@ WPM_ENABLE = yes
 VELOCIKEY_ENABLE = yes
 KEY_LOCK_ENABLE = yes
 
+# Reduces firmware bloat due to changes in qmk toolchain.
+# https://discord.com/channels/440868230475677696/473506116718952450/838845851962703893
+GRAVE_ESC_ENABLE = no
+SPACE_CADET_ENABLE = no
+
 LTO_ENABLE = yes
 
 # Bootloader selection

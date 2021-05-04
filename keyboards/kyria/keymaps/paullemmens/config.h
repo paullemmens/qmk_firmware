@@ -16,7 +16,7 @@
 
 #pragma once
 
-/* #define WPM_GRAPH */
+#define WPM_GRAPH
 
 // This helps reduce firmware size due to various changes in qmk toolchain that
 // introduce bloat.

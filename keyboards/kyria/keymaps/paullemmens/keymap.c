@@ -53,6 +53,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Personal key definitions:
 // Very special combinations
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
+#define OSX_DSP     LM(_LOWER, MOD_LCTL|MOD_LALT|MOD_LGUI)
 #define GUI_LWR     LM(_LOWER, MOD_LGUI)
 #define O_ACUTE     ALGR(KC_P)
 #define O_UMLAU     ALGR(KC_O)
@@ -148,8 +149,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |  V   |  B   |      |      |  |      |      |  N   |  M   |      |      |      |        |
- * |        |      |      |      | Cmd  | Ctrl |      |      |  |      |      | RCtrl| Cmd  |      |      |      |        |
+ * |        |      |      |      |  V   |  B   |      | Move |  |      |      |  N   |  M   |      |      |      |        |
+ * |        |      |      |      | Cmd  | Ctrl |      |window|  |      |      | RCtrl| Cmd  |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |Option|      | Cmd  |      |  | Cmd  |      |      | RAlt|      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -158,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MACOS] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-      _______, _______, _______, _______, V__LCMD, B_LCTRL, _______, _______, _______, _______, N_RCTRL, M__RCMD, _______, _______, _______, _______,
+      _______, _______, _______, _______, V__LCMD, B_LCTRL, _______, OSX_DSP, _______, _______, N_RCTRL, M__RCMD, _______, _______, _______, _______,
                                  _______, KC_LOPT, _______, KC_LCMD, _______, KC_RCMD, _______, _______, KC_RALT, _______
     ),
 /*

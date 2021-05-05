@@ -25,6 +25,7 @@ qmk_tap_dance_action_t tap_dance_actions[] = {
 // Personal key definitions:
 // Very special combinations
 #define SGUI_LWR    LM(_LOWER, MOD_LSFT|MOD_LGUI)
+#define OSX_DSP     LM(_LOWER, MOD_LCTL|MOD_LALT|MOD_LGUI)
 #define GUI_LWR     LM(_LOWER, MOD_LGUI)
 #define O_ACUTE     ALGR(KC_P)
 #define O_UMLAU     ALGR(KC_O)
@@ -41,10 +42,13 @@ qmk_tap_dance_action_t tap_dance_actions[] = {
 #define G_LSHFT     LSFT_T(KC_G)
 #define V_LSHFT     LSFT_T(KC_V)
 #define V_LCTRL     LCTL_T(KC_V)
+#define B_LCTRL     LCTL_T(KC_B)
+#define V__LCMD     LCMD_T(KC_V)
 #define N_RSHFT     RSFT_T(KC_N)
 #define N_RCTRL     RCTL_T(KC_N)
 #define M_RSHFT     RSFT_T(KC_M)
 #define M_RCTRL     RCTL_T(KC_M)
+#define M__RCMD     RCMD_T(KC_M)
 #define D_LCTRL     LCTL_T(KC_D)
 #define D_LSHFT     LSFT_T(KC_D)
 #define K_RCTRL     RCTL_T(KC_K)
@@ -61,6 +65,8 @@ qmk_tap_dance_action_t tap_dance_actions[] = {
 #define H_LOWER     LT(_LOWER, KC_H)
 #define J_RAISE     LT(_RAISE, KC_J)
 #define U_ADJST     LT(_ADJUST, KC_U)
+#define MACOS_L     DF(_MACOS)
+#define DEFAU_L     DF(_QWERTY)
 
 // https://precondition.github.io/home-row-mods#using-non-basic-keycodes-in-mod-taps
 enum custom_keycodes {
@@ -81,9 +87,10 @@ enum custom_keycodes {
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
+#define _MACOS 1
+#define _LOWER 2
+#define _RAISE 3
+#define _ADJUST 4
 
 // Shortcut to make keymap more readable
 #define RAISE_L MO(_RAISE)
@@ -108,6 +115,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT ,LGUI__Z ,KC_X    ,KC_C    ,V_LCTRL ,KC_B    ,T_RAI_L ,SGUI_LWR,        DEL_RAI ,BS_LALT ,KC_N    ,M_RCTRL ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      KC_LCTRL,RAISE_L ,KC_LGUI ,KC_LALT ,     KC_LOSP ,    KC_LCTRL,GUI_LWR ,        KC_RCTRL,ENT_RSF ,    KC_SPC  ,     KC_RALT ,KC_APP  ,KC_RCTRL,RAISE_L
+  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
+  ),
+
+  [_MACOS] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     _______ ,_______ ,_______ ,_______ ,V__LCMD ,B_LCTRL ,_______ ,OSX_DSP ,        _______ ,_______ ,N_RCTRL ,M__RCMD ,_______ ,_______ ,_______ ,_______ ,
+  //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
+     _______ ,_______ ,_______ ,KC_LOPT ,     _______ ,    KC_LCMD ,_______ ,        KC_RCMD ,_______ ,    _______ ,     KC_RALT ,_______ ,_______ ,_______
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 

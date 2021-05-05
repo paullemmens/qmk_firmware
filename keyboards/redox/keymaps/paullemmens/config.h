@@ -17,6 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+// This helps reduce firmware size due to various changes in qmk toolchain that
+// introduce bloat.
+// https://discord.com/channels/440868230475677696/473506116718952450/838843625084944414
+#define LAYER_STATE_8BIT
+
 /* Use I2C or Serial, not both */
 #define USE_SERIAL
 // #define USE_I2C

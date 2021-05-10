@@ -302,7 +302,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         case KC_HOME:
-            if (IS_LAYER_ON(_MACOS)) {
+            if (get_highest_layer(default_layer_state) == _MACOS) {
                 if (record->event.pressed) {
                     tap_code16(LCMD(KC_LEFT));
                 }
@@ -311,7 +311,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
             break;
         case KC_END:
-            if (IS_LAYER_ON(_MACOS)) {
+            if (get_highest_layer(default_layer_state) == _MACOS) {
                 if (record->event.pressed) {
                     tap_code16(LCMD(KC_RIGHT));
                 }

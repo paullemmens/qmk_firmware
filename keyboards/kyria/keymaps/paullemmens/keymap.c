@@ -308,7 +308,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 return false;
             }
-            return true;
             break;
         case KC_END:
             if (get_highest_layer(default_layer_state) == _MACOS) {
@@ -317,7 +316,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 return false;
             }
-            return true;
             break;
         default:
             return true;

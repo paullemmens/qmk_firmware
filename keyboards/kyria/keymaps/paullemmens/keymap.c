@@ -512,7 +512,7 @@ void oled_task_user(void) {
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch (get_highest_layer(layer_state)) {
-            // Move and move to windows in i3-wm
+            // Move and move to windows in i3-wm or using Rectangle in macOS.
             case _RAISE:
                 if (clockwise) {
                     if (get_highest_layer(default_layer_state) == _MACOS) {

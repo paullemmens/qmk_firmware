@@ -358,7 +358,7 @@ static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
     oled_write_P(PSTR("Kyria rev1.0"), false);
-    if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+    if (get_highest_layer(default_layer_state) == _MACOS) {
         oled_write_P(PSTR(" OSX"), false);
     }
     else {

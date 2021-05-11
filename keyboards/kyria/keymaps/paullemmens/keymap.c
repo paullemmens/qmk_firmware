@@ -545,7 +545,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
-                        if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+                        if (get_highest_layer(default_layer_state) == _MACOS) {
                             register_code(KC_LCMD);
                         }
                         else {
@@ -580,7 +580,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
     if (timer_elapsed(alt_tab_timer) > 750) {
-      if (get_highest_layer(layer_state|default_layer_state) == _MACOS) {
+      if (get_highest_layer(default_layer_state) == _MACOS) {
           unregister_code(KC_LCMD);
       }
       else {

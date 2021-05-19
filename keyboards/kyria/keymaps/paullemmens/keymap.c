@@ -290,12 +290,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
                     // send advanced keycode, etc.
-                    // the 16 bit version of the `tap_code` function is used here
-                    // because KC_HASH is a non-basic keycode.
-                    tap_code16(ALGR(KC_E));
+                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                        SEND_STRING(SS_RALT("ee"));
+                    } else {
+                        // the 16 bit version of the `tap_code` function is used here
+                        // because KC_HASH is a non-basic keycode.
+                        tap_code16(ALGR(KC_E));
+                    }
                 }
                 // do not continue with default tap action
                 // if the MT was pressed or released, but not held
+                return false;
+            }
+            break;
+        case _ACUTE_: // This is ugly, because it was originally intended as a single key press
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                        SEND_STRING(SS_RALT("eo"));
+                    } else {
+                        // the 16 bit version of the `tap_code` function is used here
+                        // because KC_HASH is a non-basic keycode.
+                        tap_code16(ALGR(KC_QUOTE));
+                    }
+                }
                 return false;
             }
             break;

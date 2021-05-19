@@ -9,7 +9,7 @@ TAP_DANCE_ENABLE = no
 UNICODE_ENABLE = no
 WPM_ENABLE = yes
 VELOCIKEY_ENABLE = yes
-KEY_LOCK_ENABLE = yes
+KEY_LOCK_ENABLE = no
 
 # Reduces firmware bloat due to changes in qmk toolchain.
 # https://discord.com/channels/440868230475677696/473506116718952450/838845851962703893

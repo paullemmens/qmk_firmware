@@ -272,6 +272,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint8_t const default_layer = get_highest_layer(default_layer_state);
+
     switch (keycode) {
         case OU_LCTL:
             if (record->tap.count > 0) {
@@ -290,7 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
                     // send advanced keycode, etc.
-                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                    if (default_layer == _MACOS) {
                         SEND_STRING(SS_RALT("e")"e");
                     } else {
                         // the 16 bit version of the `tap_code` function is used here
@@ -306,7 +308,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case _ACUTE_: // This is ugly, because it was originally intended as a single key press
             if (record->tap.count > 0) {
                 if (record->event.pressed) {
-                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                    if (default_layer == _MACOS) {
                         SEND_STRING(SS_RALT("e")"o");
                     } else {
                         // the 16 bit version of the `tap_code` function is used here
@@ -331,7 +333,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         case KC_HOME:
-            if (get_highest_layer(default_layer_state) == _MACOS) {
+            if (default_layer == _MACOS) {
                 if (record->event.pressed) {
                     tap_code16(LCMD(KC_LEFT));
                 }
@@ -339,7 +341,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         case KC_END:
-            if (get_highest_layer(default_layer_state) == _MACOS) {
+            if (default_layer == _MACOS) {
                 if (record->event.pressed) {
                     tap_code16(LCMD(KC_RIGHT));
                 }
@@ -382,10 +384,12 @@ static void render_qmk_logo(void) {
 }
 
 static void render_status(void) {
+    uint8_t const default_layer = get_highest_layer(default_layer_state);
+
     // QMK Logo and version information
     render_qmk_logo();
     oled_write_P(PSTR("Kyria rev1.0"), false);
-    if (get_highest_layer(default_layer_state) == _MACOS) {
+    if (default_layer == _MACOS) {
         oled_write_P(PSTR(" OSX"), false);
     }
     else {
@@ -539,19 +543,21 @@ void oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 // Use code from plattfot as example to make layer specifc encoder actions
 void encoder_update_user(uint8_t index, bool clockwise) {
+    uint8_t const default_layer = get_highest_layer(default_layer_state);
+
     if (index == 0) {
         switch (get_highest_layer(layer_state)) {
             // Move and move to windows in i3-wm or using Rectangle in macOS.
             case _RAISE:
                 if (clockwise) {
-                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                    if (default_layer == _MACOS) {
                         tap_code16(LCTL(LOPT(LCMD(KC_RIGHT))));
                     }
                     else {
                         tap_code16(LGUI(KC_RIGHT));
                     }
                 } else {
-                    if (get_highest_layer(default_layer_state) == _MACOS) {
+                    if (default_layer == _MACOS) {
                         tap_code16(LCTL(LOPT(LCMD(KC_LEFT))));
                     }
                     else {
@@ -572,7 +578,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
-                        if (get_highest_layer(default_layer_state) == _MACOS) {
+                        if (default_layer == _MACOS) {
                             register_code(KC_LCMD);
                         }
                         else {

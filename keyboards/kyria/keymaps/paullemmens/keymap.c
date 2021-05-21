@@ -16,7 +16,7 @@
 #include QMK_KEYBOARD_H
 
 #ifdef WPM_ENABLE
-#include <stdio.h>
+/* #include <stdio.h> */
 char wpm_str[10];
 #endif
 #ifdef WPM_GRAPH
@@ -429,8 +429,19 @@ static void render_status(void) {
 
     #ifdef WPM_ENABLE
         // Write WPM
-        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
+        /* sprintf(wpm_str, "WPM: %03d", get_current_wpm()); */
         /* oled_write_P(PSTR("\n"), false); */
+        /* oled_write(wpm_str, false); */
+        uint8_t n = get_current_wpm();
+        wpm_str[8] = '\0';
+        wpm_str[7] = '0' + n % 10;
+        wpm_str[6] = '0' + (n /= 10) % 10;
+        wpm_str[5] = '0' + n / 10;
+        wpm_str[4] = ' ';
+        wpm_str[3] = ':';
+        wpm_str[2] = 'M';
+        wpm_str[1] = 'P';
+        wpm_str[0] = 'W';
         oled_write(wpm_str, false);
     #endif
 }

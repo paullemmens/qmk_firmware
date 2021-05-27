@@ -263,10 +263,21 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #ifdef PERMISSIVE_HOLD_PER_KEY
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(1, KC_BSPC):
+        case U_ADJST:
             return true;
         default:
             return false;
+    }
+}
+#endif
+
+#ifdef IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case U_ADJST:
+            return false;
+        default:
+            return true;
     }
 }
 #endif

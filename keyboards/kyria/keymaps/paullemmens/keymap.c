@@ -605,8 +605,24 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 break;
         }
     }
-    else if (index == 1) {
+    else if (index == 1) { // Right-hand encoder
         switch (get_highest_layer(layer_state)) {
+            case _LOWER:
+                // Ctrl+left/right to move between words
+                if (get_highest_layer(default_layer_state) == _MACOS) {
+                    if (clockwise) {
+                        tap_code16(LOPT(KC_RIGHT));
+                    } else {
+                        tap_code16(LOPT(KC_LEFT));
+                    }
+                } else {
+                    if (clockwise) {
+                        tap_code16(C(KC_RIGHT));
+                    } else {
+                        tap_code16(C(KC_LEFT));
+                    }
+                }
+                break;
             default:
                 // Page up/Page down
                 if (clockwise) {

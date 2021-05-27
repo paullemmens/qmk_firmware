@@ -249,7 +249,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case K_RSHFT:
             return TAPPING_TERM + 75;
+        case F_RAISE:
         case J_RAISE:
+        case U_ADJST:
             return TAPPING_TERM - 25;
         case V__LCMD:
         case N_RCTRL:

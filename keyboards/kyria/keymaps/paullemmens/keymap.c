@@ -582,6 +582,13 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_VOLD);
                 }
                 break;
+            case _LOWER:
+                if (clockwise) {
+                    tap_code16(RCMD(KC_TILD));
+                } else {
+                    tap_code16(RSFT(RCMD(KC_TILD)));
+                }
+                break;
             // Alt-tab code from https://docs.splitkb.com/hc/en-us/articles/360010513760-How-can-I-use-a-rotary-encoder-
             default:
                 if (clockwise) {
